@@ -43,7 +43,7 @@ void eval(struct vm *vm)
 		int op = vm->bytecode[vm->pc];
 		vm->pc++;
 
-		debug("op 0x%x\n", op);
+		debug("start %d, op 0x%x\n", start, op);
 
 		switch (op) {
 
