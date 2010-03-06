@@ -61,6 +61,7 @@ struct vm {
 	int sp, pc;
 	int (*ref)(val addr, int n, val *out);
 	int (*reg)(int num, val *out);
+	void (*trace)(val addr, val size);
 };
 
 void eval(struct vm *vm);

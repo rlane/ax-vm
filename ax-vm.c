@@ -162,9 +162,24 @@ void eval(struct vm *vm)
 				break;
 			}
 
-			case aop_trace: abort();
-			case aop_trace_quick: abort();
-			case aop_trace16: abort();
+			case aop_trace: {
+				val size = pop();
+				val addr = pop();
+				vm->trace(addr, size);
+				break;
+			}
+			case aop_trace_quick: {
+				val size = imm(1);
+				val addr = pop();
+				vm->trace(addr, size);
+				break;
+			}
+			case aop_trace16: {
+				val size = imm(2);
+				val addr = pop();
+				vm->trace(addr, size);
+				break;
+			}
 
 			case aop_end:
 				vm->pc = -1;

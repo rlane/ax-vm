@@ -14,6 +14,10 @@ int reg(int num, val *out)
 	return -1;
 }
 
+void trace(val addr, val size)
+{
+}
+
 int main(int argc, int **argv)
 {
 	struct vm vm;
@@ -34,6 +38,7 @@ int main(int argc, int **argv)
 	vm.bytecode_len = n;
 	vm.ref = ref;
 	vm.reg = reg;
+	vm.trace = trace;
 
 	eval(&vm);
 
