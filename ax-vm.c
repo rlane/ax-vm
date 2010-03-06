@@ -134,7 +134,7 @@ void eval(struct vm *vm)
 				break;
 
 			case aop_if_goto: {
-				int offset = imm(2);
+				short offset = imm(2);
 				val a = pop();
 				if (a != 0)
 					vm->pc = start + offset;
@@ -142,7 +142,7 @@ void eval(struct vm *vm)
 			}
 
 			case aop_goto: {
-				int offset = imm(2);
+				short offset = imm(2);
 				vm->pc = start + offset;
 				break;
 			}

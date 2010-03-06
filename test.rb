@@ -40,5 +40,16 @@ class AXTest < Test::Unit::TestCase
 			const64 -1
 		end
 	end
+
+	def test_goto
+		check [1,2,3] do
+			goto 8 #a 8 - 0 = 8      # 0
+			const8 2                 # 3=b
+			goto 8 #c 13 - 5 = 8     # 5
+			const8 1                 # 8=a
+			goto -7 #b 3 - 10 = -7   # 10
+			const8 3                 # 13=c
+		end
+	end
 end
 
