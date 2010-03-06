@@ -14,19 +14,19 @@ void eval(struct vm *vm)
 			fprintf(stderr, "0x%x ", vm->bytecode[vm->pc]);
 			x |= (vm->bytecode[vm->pc++] << ((n-i-1)*8));
 		}
-		fprintf(stderr, "-> 0x%llx\n", x);
+		fprintf(stderr, "-> " VAL_FMT "\n", x);
 		return x;
 	}
 
 	void push(val x)
 	{
-		fprintf(stderr, "stack[%d] <- 0x%llx\n", vm->sp, x);
+		fprintf(stderr, "stack[%d] <- " VAL_FMT "\n", vm->sp, x);
 		vm->stack[vm->sp++] = x;
 	}
 
 	val pop()
 	{
-		fprintf(stderr, "stack[%d] -> 0x%llx\n", vm->sp-1, vm->stack[vm->sp-1]);
+		fprintf(stderr, "stack[%d] -> " VAL_FMT "\n", vm->sp-1, vm->stack[vm->sp-1]);
 		return vm->stack[--vm->sp];
 	}
 
@@ -162,6 +162,6 @@ void eval(struct vm *vm)
 	fprintf(stderr, "terminated\n");
 
 	while (vm->sp-- > 0) {
-		printf("stack[%d] = 0x%llx\n", vm->sp, vm->stack[vm->sp]);
+		printf("stack[%d] = " VAL_FMT "\n", vm->sp, vm->stack[vm->sp]);
 	}
 }

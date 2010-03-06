@@ -52,6 +52,8 @@ enum agent_op {
 
 typedef uint64_t val;
 
+#define VAL_FMT "0x%llx"
+
 struct vm {
 	unsigned char *bytecode;
 	int bytecode_len;
