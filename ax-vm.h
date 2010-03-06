@@ -59,6 +59,7 @@ struct vm {
 	int bytecode_len;
 	val stack[1024];
 	int sp, pc;
+	int (*ref)(val addr, int n, val *out);
 };
 
 void eval(struct vm *vm);

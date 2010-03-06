@@ -96,15 +96,21 @@ void eval(struct vm *vm)
 				break;
 			}
 
-#define REF(t) { \
-				push(13); \
+#define REF(n) { \
+				val x; \
+        int ret = vm->ref(pop(), n, &x); \
+	      if (ret) { \
+				  debug("ref failed\n"); \
+					exit(1); \
+				} \
+				push(x); \
 				break; \
 			}
 
-			case aop_ref8: REF(char);
-			case aop_ref16: REF(short);
-			case aop_ref32: REF(int);
-			case aop_ref64: REF(long);
+			case aop_ref8: REF(1);
+			case aop_ref16: REF(2);
+			case aop_ref32: REF(4);
+			case aop_ref64: REF(8);
 
 			case aop_dup: {
 				val a = pop();

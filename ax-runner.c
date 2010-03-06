@@ -4,6 +4,11 @@
 #include <stdint.h>
 #include "ax-vm.h"
 
+int ref(val addr, int n, val *out)
+{
+	return -1;
+}
+
 int main(int argc, int **argv)
 {
 	struct vm vm;
@@ -22,6 +27,7 @@ int main(int argc, int **argv)
 	vm.sp = 0;
 	vm.bytecode = buf;
 	vm.bytecode_len = n;
+	vm.ref = ref;
 
 	eval(&vm);
 
