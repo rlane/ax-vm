@@ -9,6 +9,11 @@ int ref(val addr, int n, val *out)
 	return -1;
 }
 
+int reg(int num, val *out)
+{
+	return -1;
+}
+
 int main(int argc, int **argv)
 {
 	struct vm vm;
@@ -28,6 +33,7 @@ int main(int argc, int **argv)
 	vm.bytecode = buf;
 	vm.bytecode_len = n;
 	vm.ref = ref;
+	vm.reg = reg;
 
 	eval(&vm);
 

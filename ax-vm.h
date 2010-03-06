@@ -60,6 +60,7 @@ struct vm {
 	val stack[1024];
 	int sp, pc;
 	int (*ref)(val addr, int n, val *out);
+	int (*reg)(int num, val *out);
 };
 
 void eval(struct vm *vm);

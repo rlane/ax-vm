@@ -153,7 +153,12 @@ void eval(struct vm *vm)
 
 			case aop_reg: {
 				int num = imm(2);
-				push(42);
+				val out;
+				if (vm->reg(num, &out)) {
+					debug("reg failed\n");
+					exit(1);
+				}
+				push(out);
 				break;
 			}
 
