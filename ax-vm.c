@@ -4,8 +4,10 @@
 #include <stdint.h>
 #include "ax-vm.h"
 
+int verbose = 1;
+
 #ifdef DEBUG
-#define debug(fmt, ...) fprintf(stderr, fmt, ##  __VA_ARGS__)
+#define debug(fmt, ...) ({ if (verbose) fprintf(stderr, fmt, ##  __VA_ARGS__); })
 #else
 #define debug(fmt, ...)
 #endif

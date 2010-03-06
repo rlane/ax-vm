@@ -1,3 +1,5 @@
+CFLAGS=-DDEBUG
+
 all: ax-vm
 
 ax-vm: ax-vm.o ax-runner.o
