@@ -9,7 +9,6 @@ class AXTest < Test::Unit::TestCase
 			io.write c.bytecode
 			io.close_write
 			stack = io.readlines.map { |x| x =~ /= (0x[a-fA-F\d]+)/ && $1.to_i(16) }.reverse
-			p stack
 			stack
 		end
 	end

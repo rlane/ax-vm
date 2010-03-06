@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include "ax-vm.h"
 
+#ifdef DEBUG
+#define debug(fmt, ...) fprintf(stderr, fmt, ##  __VA_ARGS__)
+#else
+#define debug(fmt, ...)
+#endif
+
 void eval(struct vm *vm)
 {
 	val imm(int n)
@@ -11,22 +17,22 @@ void eval(struct vm *vm)
 		int i;
 		val x = 0;
 		for (i = 0; i < n; i++) {
-			fprintf(stderr, "0x%x ", vm->bytecode[vm->pc]);
+			debug("0x%x ", vm->bytecode[vm->pc]);
 			x |= (vm->bytecode[vm->pc++] << ((n-i-1)*8));
 		}
-		fprintf(stderr, "-> " VAL_FMT "\n", x);
+		debug("-> " VAL_FMT "\n", x);
 		return x;
 	}
 
 	void push(val x)
 	{
-		fprintf(stderr, "stack[%d] <- " VAL_FMT "\n", vm->sp, x);
+		debug("stack[%d] <- " VAL_FMT "\n", vm->sp, x);
 		vm->stack[vm->sp++] = x;
 	}
 
 	val pop()
 	{
-		fprintf(stderr, "stack[%d] -> " VAL_FMT "\n", vm->sp-1, vm->stack[vm->sp-1]);
+		debug("stack[%d] -> " VAL_FMT "\n", vm->sp-1, vm->stack[vm->sp-1]);
 		return vm->stack[--vm->sp];
 	}
 
@@ -35,7 +41,7 @@ void eval(struct vm *vm)
 		int op = vm->bytecode[vm->pc];
 		vm->pc++;
 
-		fprintf(stderr, "op 0x%x\n", op);
+		debug("op 0x%x\n", op);
 
 		switch (op) {
 
@@ -154,10 +160,10 @@ void eval(struct vm *vm)
 				break;
 
 			default:
-				fprintf(stderr, "unknown opcode %x\n", op);
+				debug("unknown opcode %x\n", op);
 				exit(1);
 		}
 	}
 
-	fprintf(stderr, "terminated\n");
+	debug("terminated\n");
 }
