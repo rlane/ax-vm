@@ -57,4 +57,6 @@ struct vm {
 	int sp, pc;
 };
 
+void eval(struct vm *vm);
+
 #endif
