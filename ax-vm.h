@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #ifndef _AX_VM_H
 
 enum agent_op {
@@ -48,7 +50,7 @@ enum agent_op {
 	aop_last
 };
 
-typedef unsigned long long val;
+typedef uint64_t val;
 
 struct vm {
 	unsigned char *bytecode;
