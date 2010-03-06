@@ -25,5 +25,9 @@ int main(int argc, int **argv)
 
 	eval(&vm);
 
+	while (vm.sp-- > 0) {
+		printf("stack[%d] = " VAL_FMT "\n", vm.sp, vm.stack[vm.sp]);
+	}
+
 	return 0;
 }

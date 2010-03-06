@@ -160,8 +160,4 @@ void eval(struct vm *vm)
 	}
 
 	fprintf(stderr, "terminated\n");
-
-	while (vm->sp-- > 0) {
-		printf("stack[%d] = " VAL_FMT "\n", vm->sp, vm->stack[vm->sp]);
-	}
 }
