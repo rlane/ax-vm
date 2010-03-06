@@ -51,7 +51,7 @@ void eval(struct vm *vm)
 				val b = pop(); \
 				val a = pop(); \
 				push(a op b); \
-			  break; }
+				break; }
 
 			case aop_add: BINOP(+);
 			case aop_sub: BINOP(-);
@@ -100,9 +100,9 @@ void eval(struct vm *vm)
 
 #define REF(n) { \
 				val x; \
-        int ret = vm->ref(pop(), n, &x); \
-	      if (ret) { \
-				  debug("ref failed\n"); \
+				int ret = vm->ref(pop(), n, &x); \
+				if (ret) { \
+					debug("ref failed\n"); \
 					exit(1); \
 				} \
 				push(x); \
