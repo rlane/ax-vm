@@ -20,7 +20,7 @@ class AXTest < Test::Unit::TestCase
 	end
 
 	def test_arithmetic
-		check [12,9,45] do
+		check [12,9,45,4] do
 			const16 5
 			const32 7
 			add
@@ -30,6 +30,15 @@ class AXTest < Test::Unit::TestCase
 			dup
 			const64 5
 			mul
+			dup
+			const64 10
+			div_signed
+		end
+	end
+
+	def test_negative
+		check [0xffffffffffffffff] do
+			const64 -1
 		end
 	end
 end
