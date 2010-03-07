@@ -19,7 +19,7 @@ class AXTest < Test::Unit::TestCase
 	end
 
 	def test_arithmetic
-		check [12,9,45,4] do
+		check [12,9,45,4,3] do
 			const16 5
 			const32 7
 			add
@@ -35,6 +35,10 @@ class AXTest < Test::Unit::TestCase
 			const8 45
 			const64 10
 			div_signed
+
+			const8 27
+			const8 8
+			rem_signed
 		end
 	end
 
