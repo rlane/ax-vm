@@ -75,5 +75,24 @@ class AXTest < Test::Unit::TestCase
 			const8 3
 		end
 	end
+
+	def test_stack
+		check [3] do
+			const8 3
+			const8 1
+			pop
+		end
+
+		check [3,1] do
+			const8 1
+			const8 3
+			swap
+		end
+
+		check [3,3] do
+			const8 3
+			dup
+		end
+	end
 end
 
