@@ -2,6 +2,16 @@
 require 'axlib'
 require 'test/unit'
 
+class Integer
+	def u64
+		if self >= 0
+			self
+		else
+			(self + 1) + 0xffffffffffffffff
+		end
+	end
+end
+
 class AXTest < Test::Unit::TestCase
 	def eval &b
 		c = AXCode.new &b
@@ -15,7 +25,7 @@ class AXTest < Test::Unit::TestCase
 
 	def check expected_stack, &b
 		stack = eval &b
-		assert_equal expected_stack, stack
+		assert_equal expected_stack.map(&:u64), stack
 	end
 
 	def test_arithmetic
@@ -43,8 +53,10 @@ class AXTest < Test::Unit::TestCase
 	end
 
 	def test_negative
-		check [0xffffffffffffffff] do
+		check [0xffffffffffffffff, -1, 255] do
 			const64 -1
+			const64 -1
+			const8 -1
 		end
 	end
 
