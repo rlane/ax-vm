@@ -23,13 +23,16 @@ class AXTest < Test::Unit::TestCase
 			const16 5
 			const32 7
 			add
-			dup
+
+			const16 12
 			const8 3
 			sub
-			dup
+
+			const32 9
 			const64 5
 			mul
-			dup
+
+			const8 45
 			const64 10
 			div_signed
 		end
