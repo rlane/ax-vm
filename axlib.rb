@@ -68,6 +68,7 @@ class AXCode
 	end
 
 	def method_missing op, imm=nil
+		fail 'unknown op' unless OPCODES[op]
 		fail 'missing immediate' if IMMS[op] and not imm
 		fail 'unexpected immediate' if !IMMS[op] and imm
 		@a << OPCODES[op]
