@@ -119,5 +119,27 @@ class AXTest < Test::Unit::TestCase
 			ext 6
 		end
 	end
+
+	def test_lsh
+		check [80] do
+			const8 5
+			const8 4
+			lsh
+		end
+
+		check [13] do
+			const8 13
+			const8 0
+			lsh
+		end
+	end
+
+	def test_rsh
+		check [3] do
+			const8 7
+			const8 1
+			rsh_signed
+		end
+	end
 end
 
