@@ -51,5 +51,22 @@ class AXTest < Test::Unit::TestCase
 			const8 3                 # 13=c
 		end
 	end
+
+	def test_labels
+		check [1,2,3] do
+			goto :a
+
+			label :b
+			const8 2
+			goto :c
+
+			label :a
+			const8 1
+			goto :b
+
+			label :c
+			const8 3
+		end
+	end
 end
 

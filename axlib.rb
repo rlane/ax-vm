@@ -62,6 +62,8 @@ class AXCode
 
 	def initialize &b
 		@a = []
+		@relocations = []
+		@labels = {}
 		instance_eval &b if block_given?
 	end
 
@@ -69,12 +71,34 @@ class AXCode
 		fail 'missing immediate' if IMMS[op] and not imm
 		fail 'unexpected immediate' if !IMMS[op] and imm
 		@a << OPCODES[op]
-		@a.concat [imm].pack('Q').bytes.to_a[0...IMMS[op]].reverse if imm
+		if imm.is_a? Integer
+			@a.concat [imm].pack('Q').bytes.to_a[0...IMMS[op]].reverse if imm
+		elsif imm.is_a? Symbol
+			@relocations << [@a.size, @a.size-1, imm]
+			@a.concat [nil,nil]
+		elsif imm
+			fail
+		end
 		nil
 	end
 
+	def label sym
+		fail "duplicate label #{sym}" if @labels[sym]
+		@labels[sym] = @a.size
+	end
+
+	def relocated
+		a = @a.dup
+		@relocations.each do |pos, start, sym|
+			target = @labels[sym] or fail "undefined symbol #{sym}"
+			offset = target - start
+			a[pos..(pos+1)] = [offset].pack('n').bytes.to_a
+		end
+		a
+	end
+
 	def bytecode
-		@a.map(&:chr).join
+		relocated.map(&:chr).join
 	end
 
 	undef :sub, :dup
