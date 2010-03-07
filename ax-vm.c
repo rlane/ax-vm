@@ -77,20 +77,20 @@ void eval(struct vm *vm)
 				push(~pop());
 				break;
 
-			case aop_ext: {
-				int n = imm(1);
-				val a = pop();
-				val bit = 1 << (n-1);
-				val mask = ~(bit - 1);
-				a &= mask;
-				push(a);
-				break;
-			}
 			case aop_zero_ext: {
 				int n = imm(1);
 				val a = pop();
 				val bit = 1 << (n-1);
-				val mask = ~(bit - 1);
+				val mask = bit - 1;
+				a &= mask;
+				push(a);
+				break;
+			}
+			case aop_ext: {
+				int n = imm(1);
+				val a = pop();
+				val bit = 1 << (n-1);
+				val mask = bit - 1;
 				int sign = !!(a & bit);
 				a &= mask;
 				if (sign) a |= ~mask;

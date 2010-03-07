@@ -106,5 +106,18 @@ class AXTest < Test::Unit::TestCase
 			dup
 		end
 	end
+
+	def test_ext
+		check [-1,-1,43,-21] do
+			const8 -1
+			ext 8
+			const8 -1
+			ext 1
+			const8 43
+			ext 8
+			const8 43
+			ext 6
+		end
+	end
 end
 
